@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<LINK rel="stylesheet" type="text/css" href="style.css">
+		<Title>
+			Find the ball.
+		</Title>
+		<SCRIPT>
+			var myChoice={};
+			var myRand={};
+			var myReset={};
+			var myScore={};
+			
+			function threeCupsGame()
+			{
+				
+				var choose = 0;
+				var cupOne=document.getElementById('one');
+				var cupTwo=document.getElementById('two');
+				var cupThree=document.getElementById('three');
+				while (myReset.reset==1)
+					{
+						//var randomNumber = Math.round(Math.random()*2);
+						
+					
+						var guess = myChoice.choice;
+						//alert(guess);
+						//alert(myRand.randomNumber);
+						if (parseInt(guess) == myRand.randomNumber + 1)
+							{
+								document.getElementById("Dialog").innerHTML="CORRECT!!!!!";
+								document.getElementById("Dialog").style.color = "green";
+								myScore.score++;
+								//alert(myScore.score);
+								myReset.reset=0;
+								if (myRand.randomNumber==0)
+									{
+										cupOne.src="ball.jpg";
+									}
+										else if (myRand.randomNumber==1)
+											{
+												cupTwo.src="ball.jpg";
+											}
+											else if (myRand.randomNumber==2)
+												{
+													cupThree.src="ball.jpg";
+												}
+											else
+												{
+													
+												}
+							}
+							else
+								{
+									document.getElementById("Dialog").innerHTML="WRONG!!!!!";
+									document.getElementById("Dialog").style.color = "red";
+									myScore.score--;
+									myReset.reset=0;
+									if (guess==1)
+									{
+										cupOne.src="cup empty.jpg";
+									}
+										else if (guess==2)
+											{
+												cupTwo.src="cup empty.jpg";
+											}
+											else if (guess==3)
+												{
+													cupThree.src="cup empty.jpg";
+												}
+											else
+												{
+												
+												}
+								}
+							
+							document.getElementById("score").innerHTML="Score : "+myScore.score;
+						}
+						
+			}
+			function mixUpCups()
+			{
+				if (myScore.score>0)
+				{
+					myRand.randomNumber = Math.round(Math.random()*2);
+					//alert(myRand.randomNumber);
+					myReset.reset=1;
+					resetCups();
+				}
+					else
+						{
+							document.getElementById("Dialog").innerHTML="Game Over!!!!!";
+						}
+			}
+			function startANewGame()
+			{
+					myScore.score=3;
+					document.getElementById("score").innerHTML="Score : "+myScore.score;
+					resetCups();
+					document.getElementById("Dialog").innerHTML="Good Luck!!!!!!";
+			}
+			function resetCups()
+			{
+					var cupOne=document.getElementById('one');
+					var cupTwo=document.getElementById('two');
+					var cupThree=document.getElementById('three');
+					cupOne.src="cup.jpg";
+					cupTwo.src="cup.jpg";
+					cupThree.src="cup.jpg";
+			}
+			
+		</SCRIPT>
+	</HEAD>
+	<BODY>
+		<Header>
+			<H1>Find The Ball</H1>
+		</Header>
+		
+		<Section id="game">
+			
+			<image id="one" src="cup.jpg" onClick="myChoice.choice=1 ; threeCupsGame()">
+			<image id="two" src="cup.jpg" onClick="myChoice.choice=2 ; threeCupsGame()">
+			<image id="three" src="cup.jpg" onClick="myChoice.choice=3 ; threeCupsGame()">
+			<H3 id="Dialog">Click Start new Game</H3>
+			<H3 id="score">Score : 0</h3>
+			<button onClick="mixUpCups()">Mix up the Cups</button>
+			<button onClick="startANewGame()">Start new Game</button>
+		</Section>
+		<Section id="instructions">
+				<H5>Instructions</H5>
+				<ol>
+					<li>Click "Start a new Game."</li>
+					<li>Click "Mix up the Cups" after every turn.</li>
+					<li>Choose a cup, if you choose correctly you get a point, incorrectly and you loose a point.</li>
+					<li>Three points to start you off, when it falls to zero the game is over.</li>
+						
+				</ol>
+		</Section>
+	</BODY>
+</HTML>
